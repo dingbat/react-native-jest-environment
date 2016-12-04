@@ -29,12 +29,6 @@ function getJestEnvironment() {
     };
 
     return mockRequire;
-  }).
-  catch(function(e) {
-    console.error(e);
-    process.on("exit", function() {
-      process.exit(1);
-    });
   });
 };
 
