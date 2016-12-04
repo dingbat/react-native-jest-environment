@@ -3,6 +3,7 @@ var os = require("os");
 var Console = require("jest-util").Console;
 var newConfig = require("jest-config").normalize;
 var Runtime = require("jest-runtime");
+var path = require("path");
 
 function getJestEnvironment() {
   var config = newConfig({
@@ -14,7 +15,9 @@ function getJestEnvironment() {
     maxWorkers: os.cpus().length - 1,
   }).
   then(function(hasteMap) {
-    var mockRequire = function(filename) {
+    var mockRequire = function(base, filename) {
+      const filePath = path.resolve(base, filename || "");
+
       const TestEnvironment = require(config.testEnvironment);
 
       const env = new TestEnvironment(config);
@@ -22,7 +25,7 @@ function getJestEnvironment() {
       env.global.jestConfig = config;
 
       const runtime = new Runtime(config, env, hasteMap.resolver);
-      return runtime.requireModule(filename);
+      return runtime.requireModule(filePath);
     };
 
     return mockRequire;

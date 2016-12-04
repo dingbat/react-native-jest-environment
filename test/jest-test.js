@@ -11,7 +11,7 @@ describe("getJestEnvironment", function() {
         Component,
         Text,
         renderer,
-      } = mockRequire("test-src/component.js").default;
+      } = mockRequire(__dirname, "../test-src/component.js").default;
 
       const text = renderer.create(<Text x="5" />);
       expect(text.toJSON().props.x).to.equal("5");
