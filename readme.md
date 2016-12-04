@@ -19,6 +19,8 @@ getJestEnvironment().then(mockRequire => {
 });
 ```
 
+## Cucumber
+
 This was originally made for use with
 [cucumber.js](https://github.com/cucumber/cucumber-js)!
 
