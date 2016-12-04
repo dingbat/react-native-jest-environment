@@ -8,8 +8,7 @@ describe("getJestEnvironment", function() {
   it("provides a transforming require", function() {
     this.timeout(10000);
     return getJestEnvironment().then(mockRequire => {
-      const Component =
-        mockRequire(__dirname, "../test-src/component.js").default;
+      const Component = mockRequire(__dirname, "../test-src/component").default;
 
       const render = renderer.create(<Component />).toJSON();
       expect(render.props.x).to.equal("hi");

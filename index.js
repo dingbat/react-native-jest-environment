@@ -16,7 +16,10 @@ function getJestEnvironment() {
   }).
   then(function(hasteMap) {
     var mockRequire = function(base, filename) {
-      const filePath = path.resolve(base, filename || "");
+      let filePath = path.resolve(base, filename || "");
+      if (!filePath.endsWith(".js")) {
+        filePath += ".js";
+      }
 
       const TestEnvironment = require(config.testEnvironment);
 
