@@ -1,0 +1,22 @@
+{
+  "name": "react-native-jest-environment",
+  "version": "0.0.1",
+  "description": "Lightweight Jest environment for use without a CLI",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha --require babel-core/register"
+  },
+  "author": "Dan Hassin",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^17.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "cucumber": "^2.0.0-rc.1",
+    "mocha": "^3.2.0",
+    "react": "^15.4.1",
+    "react-native": "^0.39.0",
+    "react-test-renderer": "^15.4.1"
+  }
+}
