@@ -8,8 +8,6 @@
     "cucumber": "node_modules/.bin/cucumber-js --compiler js:babel-register",
     "test": "npm run unit && npm run cucumber"
   },
-  "author": "Dan Hassin",
-  "license": "MIT",
   "dependencies": {
     "jest": "^17.0.3"
   },
@@ -20,5 +18,14 @@
     "react": "^15.4.1",
     "react-native": "^0.39.0",
     "react-test-renderer": "^15.4.1"
-  }
+  },
+  "author": "Dan Hassin",
+  "license": "MIT",
+  "url": "https://github.com/dingbat/react-native-jest-environment/issues",
+  "repository": "dingbat/react-native-jest-environment",
+  "keywords": [
+    "react-native",
+    "jest",
+    "cucumber"
+  ]
 }

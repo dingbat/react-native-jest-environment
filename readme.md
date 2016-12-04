@@ -1,5 +1,8 @@
 # react-native-jest-environment
 
+[![npm version](https://badge.fury.io/js/react-native-jest-environment.svg)](https://www.npmjs.com/package/react-native-jest-environment)
+[![build status](https://api.travis-ci.org/dingbat/react-native-jest-environment.svg)](https://travis-ci.org/dingbat/react-native-jest-environment)
+
 Provides an API in JS to access a React Native Jest runtime, so that you don't
 have to use the `jest` CLI to be able to use Jest's great React Native mocking.
 
