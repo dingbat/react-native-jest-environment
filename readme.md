@@ -23,12 +23,15 @@ A convenient way to access the `mockRequire` in your step definitions is to
 load the Jest environment in a `Before` hook in a support file:
 
 ```js
+import * as path from "path";
 import getJestEnvironment from "react-native-jest-environment";
 
 module.exports = function() {
   this.Before(function() {
     return getJestEnvironment().then(mockRequire => {
-      this.require = mockRequire.bind(null, __dirname);
+      // Base all requires off the source path
+      const srcPath = path.resolve(__dirname, "../test-src");
+      this.require = mockRequire.bind(null, srcPath);
     });
   });
 };
@@ -43,8 +46,8 @@ import { expect } from "chai";
 
 module.exports = function() {
   this.Given("a component", function() {
-    const Something = this.require("test-src/something.js").default;
-    this.component = renderer.create(<Something />);
+    const Component = this.require("component.js").default;
+    this.component = renderer.create(<Component />);
   });
 
   this.Then("it has a property", function() {

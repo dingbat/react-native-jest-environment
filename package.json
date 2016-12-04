@@ -4,7 +4,9 @@
   "description": "Lightweight Jest environment for use without a CLI",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha --require babel-core/register"
+    "unit": "node_modules/.bin/mocha --require babel-core/register",
+    "cucumber": "node_modules/.bin/cucumber-js --compiler js:babel-register",
+    "test": "npm run unit && npm run cucumber"
   },
   "author": "Dan Hassin",
   "license": "MIT",
