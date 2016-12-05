@@ -1,6 +1,6 @@
 {
   "name": "react-native-jest-environment",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Lightweight Jest environment for use without a CLI",
   "main": "index.js",
   "scripts": {
