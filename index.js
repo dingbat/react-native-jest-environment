@@ -1,3 +1,5 @@
+"use strict";
+
 var os = require("os");
 
 var Console = require("jest-util").Console;
@@ -17,21 +19,21 @@ function getJestEnvironment(mocks) {
     maxWorkers: os.cpus().length - 1,
   }).
   then(function(hasteMap) {
-    const TestEnvironment = require(config.testEnvironment);
+    var TestEnvironment = require(config.testEnvironment);
 
-    const env = new TestEnvironment(config);
+    var env = new TestEnvironment(config);
     env.global.console = new Console(process.stdout, process.stderr);
     env.global.jestConfig = config;
 
-    const runtime = new Runtime(config, env, hasteMap.resolver);
+    var runtime = new Runtime(config, env, hasteMap.resolver);
 
-    const mockRequire = function(base, filename) {
-      let filePath = path.resolve(base, filename || "");
+    var mockRequire = function(base, filename) {
+      var filePath = path.resolve(base, filename || "");
       if (!filePath.endsWith(".js")) {
         filePath += ".js";
       }
-      const module = runtime.requireModule(filePath);
-      Object.keys(mocks).forEach(function(mock) {
+      var module = runtime.requireModule(filePath);
+      Object.keys(mocks).map(function(mock) {
         runtime.setMock("", mock, mocks[mock]);
       });
       return module;
