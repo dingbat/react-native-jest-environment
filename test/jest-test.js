@@ -7,7 +7,8 @@ import renderer from "react-test-renderer";
 describe("getJestEnvironment", function() {
   it("provides a transforming require", function() {
     this.timeout(10000);
-    return getJestEnvironment().then(mockRequire => {
+    const mocks = {StatusBar: () => "StatusBar"};
+    return getJestEnvironment(mocks).then(mockRequire => {
       const Component = mockRequire(__dirname, "../test-src/component").default;
 
       const render = renderer.create(<Component />).toJSON();

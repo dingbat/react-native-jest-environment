@@ -1,10 +1,10 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, StatusBar } from "react-native";
 
 class Component2 extends React.Component {
   render() {
     return (
-      <Text x="hi" />
+      <Text x="hi"><StatusBar /></Text>
     );
   }
 }

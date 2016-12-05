@@ -12,7 +12,10 @@ have to use the `jest` CLI to be able to use Jest's great React Native mocking.
 import getJestEnvironment from "react-native-jest-environment";
 import renderer from "react-test-renderer";
 
-getJestEnvironment().then(mockRequire => {
+// Any optional mocks that might reach into native
+// Think jest.mock()
+const mocks = { StatusBar: () => "StatusBar" };
+getJestEnvironment(mocks).then(mockRequire => {
   const Component = mockRequire(__dirname, "../path/to/component");
   const render = renderer.create(<Component />).toJSON();
   // ...
@@ -33,7 +36,8 @@ import getJestEnvironment from "react-native-jest-environment";
 
 module.exports = function() {
   this.Before(function() {
-    return getJestEnvironment().then(mockRequire => {
+    const mocks = { StatusBar: () => "StatusBar" };
+    return getJestEnvironment(mocks).then(mockRequire => {
       // Base all requires off the source path
       const srcPath = path.resolve(__dirname, "../test-src");
       this.require = mockRequire.bind(null, srcPath);

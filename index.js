@@ -5,7 +5,9 @@ var newConfig = require("jest-config").normalize;
 var Runtime = require("jest-runtime");
 var path = require("path");
 
-function getJestEnvironment() {
+function getJestEnvironment(mocks) {
+  mocks = mocks || {};
+
   var config = newConfig({
     rootDir: process.cwd(),
     preset: "react-native",
@@ -15,20 +17,24 @@ function getJestEnvironment() {
     maxWorkers: os.cpus().length - 1,
   }).
   then(function(hasteMap) {
-    var mockRequire = function(base, filename) {
+    const TestEnvironment = require(config.testEnvironment);
+
+    const env = new TestEnvironment(config);
+    env.global.console = new Console(process.stdout, process.stderr);
+    env.global.jestConfig = config;
+
+    const runtime = new Runtime(config, env, hasteMap.resolver);
+
+    const mockRequire = function(base, filename) {
       let filePath = path.resolve(base, filename || "");
       if (!filePath.endsWith(".js")) {
         filePath += ".js";
       }
-
-      const TestEnvironment = require(config.testEnvironment);
-
-      const env = new TestEnvironment(config);
-      env.global.console = new Console(process.stdout, process.stderr);
-      env.global.jestConfig = config;
-
-      const runtime = new Runtime(config, env, hasteMap.resolver);
-      return runtime.requireModule(filePath);
+      const module = runtime.requireModule(filePath);
+      Object.keys(mocks).forEach(function(mock) {
+        runtime.setMock("", mock, mocks[mock]);
+      });
+      return module;
     };
 
     return mockRequire;
