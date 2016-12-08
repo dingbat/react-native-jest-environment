@@ -5,3 +5,5 @@ Feature: Render React Native Components
   Scenario: Render
     Given a component
     Then it has a property
+    And I can change a native property
+    And I can test the change

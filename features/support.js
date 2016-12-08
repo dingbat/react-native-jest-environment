@@ -1,12 +1,13 @@
 import getJestEnvironment from "..";
-import * as path from "path";
 
 module.exports = function() {
   this.Before(function() {
-    const mocks = {StatusBar: () => "StatusBar"};
+    const mocks = {
+      StatusBar: () => "StatusBar",
+      TextInput: () => "TextInput",
+    };
     return getJestEnvironment(mocks).then(mockRequire => {
-      const srcPath = path.resolve(__dirname, "../test-src");
-      this.require = mockRequire.bind(null, srcPath);
+      this.Component = mockRequire(__dirname, "../test-src/component").default;
     });
   });
 };

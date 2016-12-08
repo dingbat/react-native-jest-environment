@@ -1,10 +1,22 @@
 import React from "react";
-import { Text, StatusBar } from "react-native";
+import { Text, View, StatusBar, TextInput } from "react-native";
 
 class Component2 extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {value: "old"};
+  }
+
   render() {
     return (
-      <Text x="hi"><StatusBar /></Text>
+      <View x="hi">
+        <Text />
+        <StatusBar />
+        <TextInput
+          changeMe={() => this.setState({value: "new"})}
+          value={this.state.value}
+        />
+      </View>
     );
   }
 }
